@@ -149,7 +149,9 @@ calc.genoprob = function(data, chr = "all", output.dir = ".", plot = TRUE,
       } else if(array == "gigamuga") {
 
         snps = snps[snps$tier <= 2 & snps$is.biallelic == TRUE,]
-
+        ## Fix to missing chromosome assignments that crash the script
+        snps <- snps[-(120821:120825),]
+        
         # Make sure that the marker positions always increase.
         for(i in 2:nrow(snps)) {
           if(snps[i-1,2] == snps[i,2]) {  
